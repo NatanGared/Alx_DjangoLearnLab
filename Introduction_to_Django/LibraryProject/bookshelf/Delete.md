@@ -1,6 +1,4 @@
-from bookshelf.models import Book 
-
-retrieved_book.delete()
+new_book.delete()
 
 all_books = Book.objects.all()
 print(all_books)
