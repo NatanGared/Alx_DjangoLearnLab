@@ -1,3 +1,4 @@
 from django.contrib import admin
+from relationship_app.models import Library
 
-# Register your models here.
+admin.site.register(Library)
