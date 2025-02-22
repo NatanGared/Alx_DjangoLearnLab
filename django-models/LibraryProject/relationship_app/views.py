@@ -16,33 +16,28 @@ class LibraryDetailView(DetailView):
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
 
-from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
+from django.views import View
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            auth_login(request, user)
-            return redirect('home')
-        else:
-            return render(request, 'relationship_app/login.html', {'error': 'Invalid credentials'})
+class LoginView(LoginView):
+    template_name = 'relationship_app/login.html'
+    success_url = reverse_lazy('relationship/list_books')  
 
-    return render(request, 'relationship_app/login.html')
 
-def logout_view(request):
-    auth_logout(request)
-    return redirect('logout')
+class LogoutView(LogoutView):
+    next_page = reverse_lazy('logout')
 
-def register(request):
-    if request.method == 'POST':
+
+class RegisterView(View):
+    def get(self, request):
+        form = UserCreationForm()
+        return render(request, 'relationship_app/register.html', {'form': form})
+
+    def post(self, request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
-    else:
-        form = UserCreationForm()
-
-    return render(request, 'relationship_app/register.html', {'form': form})
+            return redirect('login') 
+        return render(request, 'relationship_app/register.html', {'form': form})
