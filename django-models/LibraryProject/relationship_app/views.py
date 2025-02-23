@@ -60,28 +60,22 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Utility functions to check user roles
 def is_admin(user):
-    return hasattr(user, 'profile') and user.profile.role == 'Admin'
+    return user.is_authenticated and user.userprofile.role == 'Admin'
 
 def is_librarian(user):
-    return hasattr(user, 'profile') and user.profile.role == 'Librarian'
+    return user.is_authenticated and user.userprofile.role == 'Librarian'
 
 def is_member(user):
-    return user.profile.role == 'Member'
+    return user.is_authenticated and user.userprofile.role == 'Member'
 
-# Admin view
-@login_required
 @user_passes_test(is_admin)
-def Admin_view(request):
-    return render(request, 'admin_view.html')
+def admin_view(request):
+    return render(request, 'relationship_app/admin_view.html')
 
-# Librarian view
-@login_required
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'librarian_view.html')
+    return render(request, 'relationship_app/librarian_view.html')
 
-# Member view
-@login_required
 @user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'member_view.html')
+    return render(request, 'relationship_app/member_view.html')
