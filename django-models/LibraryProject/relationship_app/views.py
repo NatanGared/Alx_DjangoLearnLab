@@ -58,29 +58,29 @@ def user_logout(request):
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 
-def is_admin(user):
+def admin(user):
     return user.profile.role == 'Admin'
 
-def is_librarian(user):
+def librarian(user):
     return user.profile.role == 'Librarian'
 
-def is_member(user):
+def member(user):
     return user.profile.role == 'Member'
 
 # Admin view
 @login_required
-@user_passes_test(is_admin)
+@user_passes_test(admin)
 def admin_view(request):
     return render(request, 'admin_view.html')
 
 # Librarian view
 @login_required
-@user_passes_test(is_librarian)
+@user_passes_test(librarian)
 def librarian_view(request):
     return render(request, 'librarian_view.html')
 
 # Member view
 @login_required
-@user_passes_test(is_member)
+@user_passes_test(member)
 def member_view(request):
     return render(request, 'member_view.html')
