@@ -1,15 +1,11 @@
-# relationship_app/views.py
-
 from django.shortcuts import render, redirect
-from relationship_app.models import Book
+from django.views.generic.detail import DetailView
+from .models import Library
+from .models import Book
 
 def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
-
-
-from django.views.generic.detail import DetailView
-from .models import Library
 
 class LibraryDetailView(DetailView):
     model = Library
@@ -57,4 +53,4 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     messages.success(request, 'You have been logged out.')
-    return redirect('list_books')  # Redirect to a desired page
+    return redirect('list_books')
