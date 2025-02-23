@@ -60,10 +60,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Utility functions to check user roles
 def is_admin(user):
-    return user.profile.role == 'Admin'
+    return hasattr(user, 'profile') and user.profile.role == 'Admin'
 
 def is_librarian(user):
-    return user.profile.role == 'Librarian'
+    return hasattr(user, 'profile') and user.profile.role == 'Librarian'
 
 def is_member(user):
     return user.profile.role == 'Member'
