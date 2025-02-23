@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 from .models import Book
 
 class BookAdmin(admin.ModelAdmin):
@@ -9,3 +9,4 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ('title', 'author__name') 
 
 admin.site.register(Book)
+"""

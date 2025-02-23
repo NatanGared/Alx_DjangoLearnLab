@@ -1,7 +1,7 @@
 # relationship_app/views.py
 
 from django.shortcuts import render, redirect
-from bookshelf.models import Book
+from relationship_app.models import Book
 
 def list_books(request):
     books = Book.objects.all()
