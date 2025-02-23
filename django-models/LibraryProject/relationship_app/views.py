@@ -55,32 +55,33 @@ def user_logout(request):
     messages.success(request, 'You have been logged out.')
     return redirect('list_books')
 
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.core.exceptions import PermissionDenied
 
-def admin(user):
+# Utility functions to check user roles
+def is_admin(user):
     return user.profile.role == 'Admin'
 
-def librarian(user):
+def is_librarian(user):
     return user.profile.role == 'Librarian'
 
-def member(user):
+def is_member(user):
     return user.profile.role == 'Member'
 
 # Admin view
 @login_required
-@user_passes_test(admin)
+@user_passes_test(is_admin)
 def admin_view(request):
     return render(request, 'admin_view.html')
 
 # Librarian view
 @login_required
-@user_passes_test(librarian)
+@user_passes_test(is_librarian)
 def librarian_view(request):
     return render(request, 'librarian_view.html')
 
 # Member view
 @login_required
-@user_passes_test(member)
+@user_passes_test(is_member)
 def member_view(request):
     return render(request, 'member_view.html')
