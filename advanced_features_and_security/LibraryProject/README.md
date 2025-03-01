@@ -1,0 +1,1 @@
+A new django was created including a virtual environment
