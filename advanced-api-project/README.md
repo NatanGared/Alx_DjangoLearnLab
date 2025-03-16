@@ -13,3 +13,20 @@ This project implements a RESTful API for managing books using Django REST Frame
 ## Permissions
 - List and detail views are accessible to unauthenticated users.
 - Create, update, and delete views require authentication.
+
+# Advanced API Project
+
+## API Features
+### Filtering
+- Filter books by title, author, and published date.
+
+### Searching
+- Search books by title or author.
+
+### Ordering
+- Order results by title or published date.
+
+## Example Requests
+- List books by title: `GET /api/books/?title=Harry Potter`
+- Search for books: `GET /api/books/?search=Harry`
+- Order books by published date: `GET /api/books/?ordering=published_date`
