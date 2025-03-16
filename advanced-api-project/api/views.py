@@ -56,6 +56,7 @@ class BookFilter(filters.FilterSet):
     title = filters.CharFilter(lookup_expr='icontains')
     author = filters.CharFilter(lookup_expr='icontains')
     published_date = filters.DateFilter()
+    publication_year = filters.NumberFilter()
 
     class Meta:
         model = Book
@@ -68,5 +69,5 @@ class BookListView(generics.ListAPIView):
     filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filterset_class = BookFilter
     search_fields = ['title', 'author']
-    ordering_fields = ['title', 'published_date']
+    ordering_fields = ['title', 'published_date', 'publication_year']
     ordering = ['title']  # Default ordering
