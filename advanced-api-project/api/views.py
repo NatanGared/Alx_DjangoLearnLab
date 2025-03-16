@@ -49,7 +49,7 @@ class BookUpdateView(generics.UpdateAPIView):
 from django_filters import rest_framework as filters
 from .models import Book
 from .serializers import BookSerializer
-from rest_framework import generics
+from rest_framework import generics, filters as drf_filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 class BookFilter(filters.FilterSet):
@@ -60,13 +60,13 @@ class BookFilter(filters.FilterSet):
 
     class Meta:
         model = Book
-        fields = ['title', 'author', 'published_date']
+        fields = ['title', 'author', 'published_date', 'publication_year']
 
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (filters.DjangoFilterBackend, drf_filters.SearchFilter, drf_filters.OrderingFilter)
     filterset_class = BookFilter
     search_fields = ['title', 'author']
     ordering_fields = ['title', 'published_date', 'publication_year']
