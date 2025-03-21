@@ -189,3 +189,12 @@ def create_post(request):
         form = PostForm()
     
     return render(request, 'blog/post_form.html', {'form': form})
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'  # Change to your template path
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        tag_slug = self.kwargs.get('tag_slug')
+        return Post.objects.filter(tags__slug=tag_slug)  # Filter posts by tag
