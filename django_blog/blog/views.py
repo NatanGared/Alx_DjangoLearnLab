@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
+from django.views.generic import TemplateView
 
-class HomeView():
-    template_name = 'base.html'
+def home(request):
+    return render(request, 'base.html')
 
 def register(request):
     if request.method == 'POST':
@@ -159,3 +160,22 @@ class CommentDeleteView(View):
             return redirect('post-detail', pk=post_pk)
 
         return redirect('post-detail', pk=comment.post.pk)
+    
+from django.db.models import Q
+
+def search_posts(request):
+    query = request.GET.get('q')
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
+    else:
+        posts = Post.objects.all()
+
+    return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})
+
+def tagged_posts(request, tag_name):
+    posts = Post.objects.filter(tags__name__in=[tag_name])
+    return render(request, 'blog/tagged_posts.html', {'posts': posts, 'tag_name': tag_name})

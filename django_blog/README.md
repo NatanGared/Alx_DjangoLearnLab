@@ -51,3 +51,11 @@ The comment system allows users to engage with blog posts by leaving comments. A
 ## Permissions
 - Only authenticated users can post comments.
 - Only the author of a comment can edit or delete it.
+
+# Tagging and Search Features
+
+## Adding Tags to Posts
+During post creation or editing, you can add tags in the designated field. Tags help categorize your posts and make them easily discoverable.
+
+## Searching for Posts
+Use the search bar at the top of the page to look for posts by keywords or tags. Simply enter your query and press "Search" to view the results.
