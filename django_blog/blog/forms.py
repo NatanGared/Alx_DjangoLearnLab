@@ -11,7 +11,7 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class TagWidget(forms.TextInput):
+class TagWidget():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.attrs.update({'placeholder': 'Add tags separated by commas'})
