@@ -17,7 +17,7 @@ class TagWidget():
         self.attrs.update({'placeholder': 'Add tags separated by commas'})
 
 class PostForm(forms.ModelForm):
-    tags = TagField(widget=TagWidget)  # Use your custom TagWidget
+    tags = TagField(widgets=TagWidget)  # Use your custom TagWidget
 
     class Meta:
         model = Post
