@@ -179,3 +179,14 @@ def search_posts(request):
 def tagged_posts(request, tag_name):
     posts = Post.objects.filter(tags__name__in=[tag_name])
     return render(request, 'blog/tagged_posts.html', {'posts': posts, 'tag_name': tag_name})
+
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Redirect to home or another page
+    else:
+        form = PostForm()
+    
+    return render(request, 'blog/post_form.html', {'form': form})
