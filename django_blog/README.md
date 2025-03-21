@@ -30,3 +30,24 @@
 - `/posts/<int:pk>/`: View details of a post.
 - `/posts/<int:pk>/edit/`: Edit an existing post.
 - `/posts/<int:pk>/delete/`: Delete a post.
+
+
+# Comment System Documentation
+
+## Overview
+The comment system allows users to engage with blog posts by leaving comments. Authenticated users can create, edit, and delete their comments.
+
+## Features
+- **Post Comments**: Users can add comments to blog posts.
+- **Edit Comments**: Users can edit their comments if they are the author.
+- **Delete Comments**: Users can delete their comments if they are the author.
+- **View Comments**: All users can see comments on blog posts.
+
+## How to Use
+1. Navigate to a blog post to view existing comments and add your own.
+2. Click "Edit" next to your comment to modify it.
+3. Click "Delete" to remove your comment.
+
+## Permissions
+- Only authenticated users can post comments.
+- Only the author of a comment can edit or delete it.
